@@ -1,0 +1,32 @@
+{
+  "name": "christmas-bot",
+  "version": "1.0.0",
+  "description": "A christmas discord bot that will tell you how long till christmas",
+  "main": "mybot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+"
+  },
+  "keywords": [
+    "christmas",
+    "bot",
+    "discord"
+  ],
+  "author": "Dalton Hart daltonvaren@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DaltonHart/Dice-Discord-Bot/issues"
+  },
+  "homepage": "https://github.com/DaltonHart/Dice-Discord-Bot#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "discord.js": "^11.4.2",
+    "express": "^4.16.4",
+    "giphy-api": "^1.2.7",
+    "got": "^9.0.0",
+    "heroku-self-ping": "^1.1.5"
+  }
+}
