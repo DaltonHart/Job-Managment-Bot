@@ -27,6 +27,7 @@
     "express": "^4.16.4",
     "giphy-api": "^1.2.7",
     "got": "^9.0.0",
-    "heroku-self-ping": "^1.1.5"
+    "heroku-self-ping": "^1.1.5",
+    "mongoose": "^5.4.6"
   }
 }
