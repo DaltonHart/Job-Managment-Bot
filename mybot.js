@@ -1,11 +1,11 @@
 const    
     Discord = require("discord.js"),
-    { prefix, token, api } = require('./config.json'),
+    { prefix, token, } = require('./config.json'),
     fs = require('fs'),
     cooldowns = new Discord.Collection(),
-    got = require('got'),
     express = require('express'),
-    app = express();
+    app = express(),
+    db = require('./models');
 
     require('heroku-self-ping')(`https://${process.env.HEROKU_APP_NAME}.herokuapp.com`);
 
@@ -91,3 +91,16 @@ app.listen(process.env.PORT || 8000, ()=>{
 app.get('/', (req, res) => {
   res.json({data: 'running'});
   })
+
+app.get('/api/jobs', (req,res)=>{
+  db.Job.find()
+  .exec((err, jobs) => {
+    let total = jobs.length
+    if (err) {
+      return console.log("index error: " + err); }
+      res.json({
+        amount: total,
+        data:jobs
+      });
+    })
+})
