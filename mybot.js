@@ -85,7 +85,7 @@ client.on("message", (message) => {
       message.reply('there was an error trying to execute that command!');
   }
   } else {
-    // has none of the roles
+    message.channel.send(`You do not have the correct role to use me. Sorry!`)
   }
   
 });
