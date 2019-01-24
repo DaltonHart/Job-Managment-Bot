@@ -29,6 +29,9 @@ client.on("ready", () => {
 
 
 client.on("message", (message) => {
+  if (msg.channel.id === '538080167390609418') {
+    // Deal with command
+  
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   const args = message.content.slice(prefix.length).split(/ +/);
@@ -79,6 +82,8 @@ client.on("message", (message) => {
   catch (error) {
       console.error(error);
       message.reply('there was an error trying to execute that command!');
+  }
+
   }
 });
 
