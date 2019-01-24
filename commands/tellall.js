@@ -12,7 +12,6 @@ module.exports = {
     description: 'Sends a Dm of all Jobs sorted by due date.',
     aliases: [],
     usage: '',
-    cooldown: 5,
     execute(message, args) {
         let userRequested = ` <@${message.author.id}> `
         db.Job.find({user:userRequested}).exec((err,jobs)=>{

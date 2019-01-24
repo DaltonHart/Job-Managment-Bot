@@ -14,7 +14,6 @@ module.exports = {
     description: 'Sends a Dm of all Jobs that are not completed.',
     aliases: [],
     usage: '',
-    cooldown: 5,
     execute(message, args) {
         db.Job.find({complete:false}).exec((err,jobs)=>{
 
