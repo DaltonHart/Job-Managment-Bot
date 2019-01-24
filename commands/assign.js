@@ -14,7 +14,7 @@ module.exports = {
     name: 'assign',
     description: 'A command to set a job to a taged user.',
     args: true,
-    usage: '<description><user><due date>',
+    usage: '"<description>" <user> "<due date>"',
     execute(message, args) {
         let commandParts = message.content.split('"')
         let assignedUser = commandParts[2]
@@ -25,7 +25,6 @@ module.exports = {
         var filtered = dateArr.filter(function (el) {
             return el != '';
           });
-          console.log(filtered)
         if (filtered.length <= 2){
             let year = new Date()
             filtered.push(year.toISOString().split('-')[0])

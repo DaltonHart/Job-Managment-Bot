@@ -12,7 +12,7 @@ const moment = require('moment')
 
 module.exports = {
     name: 'alldisabled',
-    description: 'A command to to show all disbaled jobs.',
+    description: 'A command to to show all disabled jobs.',
     args: false,
     usage: '',
     execute(message, args) {

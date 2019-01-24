@@ -11,9 +11,7 @@ const moment = require('moment')
 
 module.exports = {
     name: 'remind',
-    description: 'Sends a Dm of all Jobs that are not completed sorted by due date.',
-    aliases: [],
-    usage: '',
+    description: 'Sends a Dm of all Jobs that are not completed for the requested user sorted by due date.',
     cooldown: 5,
     execute(message, args) {
         let userRequested = ` <@${message.author.id}> `
