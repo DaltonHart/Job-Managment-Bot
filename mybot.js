@@ -29,8 +29,9 @@ client.on("ready", () => {
 
 
 client.on("message", (message) => {
-  if (message.channel.id === '538080167390609418') {
-    // Deal with command
+  if(message.member.roles.some(r=>["Dev", "Mod", "Server Staff", "Proficient"].includes(r.name)) ) {
+    // has one of the roles
+  
   
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -83,8 +84,10 @@ client.on("message", (message) => {
       console.error(error);
       message.reply('there was an error trying to execute that command!');
   }
-
+  } else {
+    // has none of the roles
   }
+  
 });
 
 client.login(token);
