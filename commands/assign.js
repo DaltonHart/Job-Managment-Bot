@@ -61,7 +61,7 @@ module.exports = {
                   .setColor('#724B34')
                   .setTitle(`Job Assigned`)
                   .setDescription(`Job ID: ${newJob._id}`)
-                  .addField(`TODO:`,`${newJob.description}`, true)
+                  .addField(`TODO:`,`${newJob.description}`, false)
                   .addField(`COMPLETE:`, `${newJob.complete}`, true)
                   .addField(`DUE:`,`${date}`, true)
                   .setFooter(`Assigned by ${message.author.username}`)

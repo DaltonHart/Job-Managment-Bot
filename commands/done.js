@@ -27,7 +27,7 @@ module.exports = {
                 .setColor('#724B34')
                 .setTitle(`Job Completed`)
                 .setDescription(`Job ID: ${found._id}`)
-                .addField(`TODO:`,`${found.description}`, true)
+                .addField(`TODO:`,`${found.description}`, false)
                 .addField(`COMPLETE:`, `${found.complete}`, true)
                 .addField(`DUE:`,`${date}`, true)
   
