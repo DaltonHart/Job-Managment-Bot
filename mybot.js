@@ -29,7 +29,7 @@ client.on("ready", () => {
 
 
 client.on("message", (message) => {
-  if (msg.channel.id === '538080167390609418') {
+  if (message.channel.id === '538080167390609418') {
     // Deal with command
   
   if (!message.content.startsWith(prefix) || message.author.bot) return;
