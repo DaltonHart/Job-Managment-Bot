@@ -6,29 +6,67 @@
 // - Associate boolean "complete" to false
 // !assign [description] [user] [due time] 
 
-const axios = require("axios")
 const Discord = require('discord.js');
+const db = require('../models')
+const moment = require('moment')
 
 module.exports = {
     name: 'assign',
-    description: 'A command to check pricing of a stock symbol and return price along with news information.',
+    description: 'A command to set a job to a taged user.',
     args: true,
     usage: '<description><user><due date>',
     execute(message, args) {
-        // console.log(args)
         let commandParts = message.content.split('"')
         let assignedUser = commandParts[2]
         let desc = commandParts[1]
         let dueDate = commandParts[3]
 
-        const exampleEmbed = new Discord.RichEmbed()
-            .setTitle(`Job Assigned`)
-            .setTimestamp(new Date())
-            .setColor(3447003)
-            .addField(desc)
-            .addField(`Due by **${dueDate}**`)
+        let dateArr = dueDate.split(' ')
+        if (dateArr.length <= 2){
+            let year = new Date()
+            dateArr.push(year.toISOString().split('-')[0])
+            let finalDate = dateArr.join(' ')
+            dueDate = finalDate
+        }
+        
+        let id;
 
-        message.channel.send(exampleEmbed);
+        db.Job.find().exec((err,jobs)=>{
+            let total = jobs.length
+            if (total === 0){
+                id = 1
+            } else {
+                id = jobs[total-1]._id + 1
+            }
+            
+            let job = {
+                user: assignedUser,
+                description: desc,
+                complete: false,
+                dueTime: dueDate,
+                _id: id
+            }
+    
+            db.Job.create(job, (err, newJob)=>{
+                if (err) {
+                    console.log('ERROR', err)
+                  }
+                  let date = moment(newJob.dueTime).format('MMM Do YY')
+                  const exampleEmbed = new Discord.RichEmbed()
+                  .setTimestamp(new Date())
+                  .setColor('#724B34')
+                  .setTitle(`Job Assigned`)
+                  .setDescription(`Job ID: ${newJob._id}`)
+                  .addField(`TODO:`,`${newJob.description}`, true)
+                  .addField(`COMPLETE:`, `${newJob.complete}`, true)
+                  .addField(`DUE:`,`${date}`, true)
+                  .setFooter(`Assigned by ${message.author.username}`)
+      
+              message.channel.send(`${newJob.user}has been assigned a job.`,exampleEmbed);
+            })
+        })
+
+        
     },
     
 };
