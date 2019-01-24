@@ -29,7 +29,7 @@ client.on("ready", () => {
 
 
 client.on("message", (message) => {
-  if(message.member.roles.some(r=>["Dev", "Mod", "Server Staff", "Proficient"].includes(r.name)) ) {
+  if(message.member.roles.some(r=>["devs", "Proficient"].includes(r.name)) ) {
     // has one of the roles
   
   
