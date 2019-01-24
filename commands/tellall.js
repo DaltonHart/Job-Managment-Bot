@@ -9,7 +9,7 @@ const moment = require('moment')
 
 module.exports = {
     name: 'tellall',
-    description: 'Sends a Dm of all Job descriptions sorted by due date.',
+    description: 'Sends a Dm of all Jobs sorted by due date.',
     aliases: [],
     usage: '',
     cooldown: 5,
