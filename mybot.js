@@ -30,19 +30,12 @@ client.on("ready", () => {
 
 client.on("message", (message) => {
   if(message.member.roles.some(r=>["devs", "Proficient"].includes(r.name)) ) {
-    // has one of the roles
-  
-  
   if (!message.content.startsWith(prefix) || message.author.bot) return;
-
   const args = message.content.slice(prefix.length).split(/ +/);
   const commandName = args.shift().toLowerCase();
-  //allows use of alias 
   const command = client.commands.get(commandName)
     || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
     if (!command) return;
-
-//checking if user actually left any arguments
   if (command.args && !args.length) {
     let reply = `You didn't provide any arguments, ${message.author}!`;
     if (command.usage) {
@@ -84,9 +77,7 @@ client.on("message", (message) => {
       console.error(error);
       message.reply('there was an error trying to execute that command!');
   }
-  } else {
-    message.channel.send(`You do not have the correct role to use me. Sorry!`)
-  }
+  } 
   
 });
 
