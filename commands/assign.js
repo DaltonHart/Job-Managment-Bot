@@ -22,10 +22,14 @@ module.exports = {
         let dueDate = commandParts[3]
 
         let dateArr = dueDate.split(' ')
-        if (dateArr.length <= 2){
+        var filtered = dateArr.filter(function (el) {
+            return el != '';
+          });
+          console.log(filtered)
+        if (filtered.length <= 2){
             let year = new Date()
-            dateArr.push(year.toISOString().split('-')[0])
-            let finalDate = dateArr.join(' ')
+            filtered.push(year.toISOString().split('-')[0])
+            let finalDate = filtered.join(' ')
             dueDate = finalDate
         }
         
