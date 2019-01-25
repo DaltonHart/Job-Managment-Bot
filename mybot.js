@@ -5,7 +5,9 @@ const
     cooldowns = new Discord.Collection(),
     express = require('express'),
     app = express(),
-    db = require('./models');
+    db = require('./models'),
+    moment = require('moment'),
+    cron = require('node-cron');
 
     require('heroku-self-ping')(`https://${process.env.HEROKU_APP_NAME}.herokuapp.com`);
 
@@ -79,3 +81,59 @@ app.get('/api/jobs', (req,res)=>{
       });
     })
 })
+
+cron.schedule('* * 8 * *', () => {
+  console.log('cron activate');
+  db.Job.find({complete:false}).exec((jobs)=>{
+    let filterJobs = jobs.filter(function (job) {
+      return job.complete == false 
+    });
+  
+  if(filterJobs.length > 0){
+  function compare(a, b) {
+      const dateA = moment(a.dueTime)
+      const dateB = moment(b.dueTime)
+      let comparison = 0
+      if (dateA > dateB) {
+        comparison = 1;
+      } else if (dateA < dateB) {
+        comparison = -1;
+      }
+      return comparison;
+    }
+    filterJobs.sort(compare)
+
+  filterJobs.forEach((job)=>{
+      let jobUser = job.user
+      let userId = jobUser.replace(/\D/g,'')
+      let momentToday = moment()
+      let momentJobDate = moment(job.dueTime)
+      let date = momentJobDate.format('MMM Do YY')
+
+      if (momentToday > momentJobDate){
+          let embed = new Discord.RichEmbed()
+              .setTimestamp(new Date())
+              .setColor('#C82233')
+              .setTitle(`Job Due`)
+              .setDescription(`Job ID: ${job._id}`)
+              .addField(`TODO:`,`${job.description}`, false)
+              .addField(`COMPLETE:`, `${job.complete}`, true)
+              .addField(`DUE:`,`${date}`, true)
+              Client.users.get(userId).send(`Assigned: ${job.user}`,{embed})
+      } else {
+          let embed = new Discord.RichEmbed()
+              .setTimestamp(new Date())
+              .setColor('#33CD32')
+              .setTitle(`Job Due`)
+              .setDescription(`Job ID: ${job._id}`)
+              .addField(`TODO:`,`${job.description}`, false)
+              .addField(`COMPLETE:`, `${job.complete}`, true)
+              .addField(`DUE:`,`${date}`, true)
+              Client.users.get(userId).send(`Assigned: ${job.user}`,{embed})
+      }
+  })
+  } else {
+    Client.users.get(userId).send(`All jobs are completed. :)`)
+  }
+  })
+});

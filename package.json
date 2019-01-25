@@ -28,6 +28,7 @@
     "got": "^9.0.0",
     "heroku-self-ping": "^1.1.5",
     "moment": "^2.24.0",
-    "mongoose": "^5.4.6"
+    "mongoose": "^5.4.6",
+    "node-cron": "^2.0.3"
   }
 }
