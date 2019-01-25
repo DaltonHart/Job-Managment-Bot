@@ -16,7 +16,7 @@ module.exports = {
     execute(message, args) {
         let id = args[0]
         
-        db.Job.find({_id:id}).exec((err, found)=>{
+        db.Job.findOne({_id:id}).exec((err, found)=>{
             console.log(found)
             if (err) {
                 console.log('ERROR', err)
