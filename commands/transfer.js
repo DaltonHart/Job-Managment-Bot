@@ -27,7 +27,7 @@ module.exports = {
                 const exampleEmbed = new Discord.RichEmbed()
                 .setTimestamp(new Date())
                 .setColor('#724B34')
-                .setTitle(`Job Completed`)
+                .setTitle(`Job transfered`)
                 .setDescription(`Job ID: ${found._id}`)
                 .addField(`TODO:`,`${found.description}`, false)
                 .addField(`COMPLETE:`, `${found.complete}`, true)
