@@ -31,7 +31,7 @@ module.exports = {
               .addField(`COMPLETE:`, `${found.complete}`, true)
               .addField(`DUE:`,`${date}`, true)
   
-          message.channel.send(`${found.user} Job has been Completed.`,exampleEmbed);
+          message.channel.send(`${found.user} Job is not complete.`,exampleEmbed);
         })
     },
 };

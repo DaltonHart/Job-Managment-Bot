@@ -24,7 +24,7 @@ module.exports = {
               .setTitle(`Job disabled`)
               .setDescription(`Job ID: ${found._id}`)
   
-          message.channel.send(`Job assigned to ${job.user} has been disabled.`,exampleEmbed);
+          message.channel.send(`Job assigned to ${found.user} has been disabled.`,exampleEmbed);
         })
     },
 };
