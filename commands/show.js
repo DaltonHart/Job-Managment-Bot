@@ -17,6 +17,7 @@ module.exports = {
         let id = args[0]
         
         db.Job.find({_id:id}).exec((err, found)=>{
+            console.log(found)
             if (err) {
                 console.log('ERROR', err)
                return message.channel.send(`Invalid id entered.`);
