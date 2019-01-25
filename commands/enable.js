@@ -41,7 +41,7 @@ module.exports = {
               .setTitle(`Job enabled`)
               .setDescription(`Job ID: ${found._id}`)
   
-          message.channel.send(`Job has been enabled.`,exampleEmbed);
+          message.channel.send(`Job for ${found.user} has been enabled.`,exampleEmbed);
         })
     },
 };

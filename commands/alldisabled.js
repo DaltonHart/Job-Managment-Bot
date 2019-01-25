@@ -33,7 +33,7 @@ module.exports = {
                   .addField(`COMPLETE:`, `${job.complete}`, true)
                   .addField(`DUE:`,`${date}`, true)
       
-              message.channel.send(exampleEmbed);
+              message.channel.send(`Assigned: ${job.user}`,exampleEmbed);
             })
         })
     },

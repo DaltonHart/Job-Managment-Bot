@@ -48,7 +48,7 @@ module.exports = {
                         .addField(`TODO:`,`${job.description}`, false)
                         .addField(`COMPLETE:`, `${job.complete}`, true)
                         .addField(`DUE:`,`${date}`, true)
-                    message.author.send({embed})
+                    message.author.send(`Assigned: ${job.user}`,{embed})
                 } else {
                     let embed = new Discord.RichEmbed()
                         .setTimestamp(new Date())
@@ -58,7 +58,7 @@ module.exports = {
                         .addField(`TODO:`,`${job.description}`, false)
                         .addField(`COMPLETE:`, `${job.complete}`, true)
                         .addField(`DUE:`,`${date}`, true)
-                    message.author.send({embed})
+                    message.author.send(`Assigned: ${job.user}`,{embed})
                 }
             })
 
