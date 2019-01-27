@@ -16,10 +16,12 @@ module.exports = {
         let userRequested = ` <@${message.author.id}> `
         console.log(userRequested)
         db.Job.find({user:userRequested}).exec((err,jobs)=>{
+            console.log(jobs)
 
             let filterJobs = jobs.filter(function (job) {
                 return job.complete == false 
               });
+              console.log(filteredJobs)
             
             if(filterJobs.length > 0){
             function compare(a, b) {
