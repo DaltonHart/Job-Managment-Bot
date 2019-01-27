@@ -31,7 +31,7 @@ client.on("ready", () => {
 
 
 client.on("message", (message) => {
-  if(message.channel.type === 'dm' || message.member.roles.some(r=>["devs", "admin"].includes(r.name))) {
+  if(message.channel.type === 'dm' || message.member.roles.some(r=>["devs", "admin", "helpers"].includes(r.name))) {
     
   if (!message.content.startsWith(prefix) || message.author.bot) return;
   const args = message.content.slice(prefix.length).split(/ +/);
