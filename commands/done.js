@@ -3,6 +3,7 @@
 const Discord = require('discord.js');
 const db = require('../models')
 const moment = require('moment')
+const client = new Discord.Client();
 
 module.exports = {
     name: 'done',
