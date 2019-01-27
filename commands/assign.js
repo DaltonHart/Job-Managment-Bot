@@ -17,7 +17,7 @@ module.exports = {
     usage: '"<description>" <user> "<due date>"',
     execute(message, args) {
         let commandParts = message.content.split('"')
-        let assignedUser = commandParts[2]
+        let assignedUser = commandParts[2].replace(/\s/g, '');
         let desc = commandParts[1]
         let dueDate = commandParts[3]
 
