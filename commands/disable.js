@@ -8,7 +8,6 @@ module.exports = {
     args: true,
     usage: '<job id>',
     execute(message, args) {
-        // console.log(args)
         let id = args[0]
         let updatedJob = {
             disabled: true

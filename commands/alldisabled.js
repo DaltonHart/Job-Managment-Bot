@@ -21,7 +21,6 @@ module.exports = {
             if (err) {
                 console.log('ERROR', err)
             }
-            console.log(jobs)
             jobs.forEach((job)=>{
                 let date = moment(job.dueTime).format('MMM Do YY')
                 const exampleEmbed = new Discord.RichEmbed()

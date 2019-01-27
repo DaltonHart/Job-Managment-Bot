@@ -27,9 +27,7 @@ module.exports = {
                 }
                 return comparison;
               }
-              console.log(jobs)
               jobs.sort(compare)
-              console.log(jobs)
 
             jobs.forEach((job)=>{
                 let momentToday = moment()

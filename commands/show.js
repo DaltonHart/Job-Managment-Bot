@@ -17,12 +17,10 @@ module.exports = {
         let id = args[0]
         
         db.Job.findOne({_id:id}).exec((err, found)=>{
-            console.log(found)
             if (err) {
                 console.log('ERROR', err)
                return message.channel.send(`Invalid id entered.`);
               } else {
-                  console.log(found)
                 let date = moment(found.dueTime).format('MMM Do YY')
                 const exampleEmbed = new Discord.RichEmbed()
                 .setTimestamp(new Date())
