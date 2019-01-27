@@ -137,3 +137,9 @@ cron.schedule('* * 8 * *', () => {
   }
   })
 });
+
+let testcron = cron.schedule('30 * * * *', () => {
+  console.log(`logging cron`)
+});
+
+testcron.start();
