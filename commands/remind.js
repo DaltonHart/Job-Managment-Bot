@@ -14,6 +14,7 @@ module.exports = {
     description: 'Sends a Dm of all Jobs that are not completed for the requested user sorted by due date.',
     execute(message, args) {
         let userRequested = ` <@${message.author.id}> `
+        console.log(userRequested)
         db.Job.find({user:userRequested}).exec((err,jobs)=>{
 
             let filterJobs = jobs.filter(function (job) {
