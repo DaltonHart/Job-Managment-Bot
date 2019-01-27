@@ -13,7 +13,7 @@ module.exports = {
     name: 'remind',
     description: 'Sends a Dm of all Jobs that are not completed for the requested user sorted by due date.',
     execute(message, args) {
-        let userRequested = ` <@${message.author.id}> `
+        let userRequested = `<@${message.author.id}>`
         console.log(userRequested)
         db.Job.find({user:userRequested}).exec((err,jobs)=>{
             console.log(jobs)
@@ -21,7 +21,7 @@ module.exports = {
             let filterJobs = jobs.filter(function (job) {
                 return job.complete == false 
               });
-              console.log(filteredJobs)
+              console.log(filterJobs)
             
             if(filterJobs.length > 0){
             function compare(a, b) {
