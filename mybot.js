@@ -61,8 +61,13 @@ client.on("message", (message) => {
 
 client.login(token);
 
+let testcron = cron.schedule('30 * * * *', () => {
+  console.log(`logging cron`)
+});
+
 app.listen(process.env.PORT || 8000, ()=>{
   console.log('Listening to port');
+  testcron.start();
   })
 
 app.get('/', (req, res) => {
@@ -138,8 +143,4 @@ cron.schedule('* * 8 * *', () => {
   })
 });
 
-let testcron = cron.schedule('30 * * * *', () => {
-  console.log(`logging cron`)
-});
 
-testcron.start();
