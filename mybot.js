@@ -61,7 +61,7 @@ client.on("message", (message) => {
 
 client.login(token);
 
-cron.schedule('*/30 * * * *', () => {
+cron.schedule('*/5 * * * * *', () => {
   console.log(`logging cron`)
 });
 
