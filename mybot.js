@@ -61,7 +61,6 @@ client.on("message", (message) => {
 
 client.login(token);
 
-
 app.listen(process.env.PORT || 8000, ()=>{
   console.log('Listening to port');
   })
@@ -84,7 +83,7 @@ app.get('/api/jobs', (req,res)=>{
 })
 
 cron.schedule('0 0 8 * *', () => {
-  console.log('cron activate');
+  console.log('cron activate and jobs sent');
   db.Job.find({complete:false}).exec((jobs)=>{
     let filterJobs = jobs.filter(function (job) {
       return job.complete == false 

@@ -32,6 +32,9 @@ module.exports = {
                 .addField(`DUE:`,`${date}`, true)
   
           message.channel.send(`${found.user} Job has been Completed.`,exampleEmbed);
+          client.channels.get("493242085831475210").send(`${found.user} Job has been Completed.`,exampleEmbed)
+
+
               }
               
         })
