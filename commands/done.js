@@ -3,9 +3,9 @@
 const Discord = require('discord.js');
 const db = require('../models')
 const moment = require('moment')
-const client = require('../mybot')
+const constants = require('../mybot')
 
-console.log(client)
+console.log(constants.client.channels)
 
 module.exports = {
     name: 'done',
