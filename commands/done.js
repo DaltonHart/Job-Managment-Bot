@@ -5,7 +5,7 @@ const db = require('../models')
 const moment = require('moment')
 const client = require('../mybot')
 
-console.log(client)
+console.log(client.channels)
 
 module.exports = {
     name: 'done',
