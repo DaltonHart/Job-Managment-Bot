@@ -58,7 +58,7 @@ module.exports = {
                   }
                   let date = moment(newJob.dueTime).format('MMM Do YY')
                   db.Job.find({user:assignedUser}).exec((err,jobs)=>{
-                      let overburden = jobs.length
+                      let overburden = jobs.length + 1
                     const exampleEmbed = new Discord.RichEmbed()
                         .setTimestamp(new Date())
                         .setColor('#724B34')
@@ -70,7 +70,7 @@ module.exports = {
                         .setFooter(`Assigned by ${message.author.username}`)
       
               message.channel.send(`${newJob.user} has been assigned a job.`,exampleEmbed);
-              message.channel.send(`${newJob.user} currently has ${overburden} jobs assigned.`);
+              message.channel.send(`${newJob.user} currently has **${overburden} jobs** assigned.`);
                   })
                   
             })
