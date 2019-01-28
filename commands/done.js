@@ -34,7 +34,7 @@ module.exports = {
   
           message.channel.send(`${found.user} Job has been Completed.`,exampleEmbed);
           console.log(message.client.channels.get("493242085831475210"))
-        //   client.channels.get("493242085831475210").send(`${found.user}'s Job has been Completed.`,exampleEmbed)
+           message.client.channels.get("493242085831475210").send(`${found.user}'s Job has been Completed.`,exampleEmbed)
               }
               
         })
