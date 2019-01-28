@@ -65,7 +65,7 @@ module.exports = {
                   .addField(`DUE:`,`${date}`, true)
                   .setFooter(`Assigned by ${message.author.username}`)
       
-              message.channel.send(`${newJob.user}has been assigned a job.`,exampleEmbed);
+              message.channel.send(`${newJob.user} has been assigned a job.`,exampleEmbed);
             })
         })
 
