@@ -15,12 +15,9 @@ app.use('/files', express.static('files'));
 
 const client = new Discord.Client();
 
-let constants = {
-  client: client
-}
 
 module.exports = {
-  constants
+  client: client
 }
 
 client.commands = new Discord.Collection();
