@@ -50,25 +50,29 @@ module.exports = {
                 _id: id
             }
 
-            let overburden = db.Job.find({user:assignedUser}).length
+            
     
             db.Job.create(job, (err, newJob)=>{
                 if (err) {
                     console.log('ERROR', err)
                   }
                   let date = moment(newJob.dueTime).format('MMM Do YY')
-                  const exampleEmbed = new Discord.RichEmbed()
-                  .setTimestamp(new Date())
-                  .setColor('#724B34')
-                  .setTitle(`Job Assigned`)
-                  .setDescription(`Job ID: ${newJob._id}`)
-                  .addField(`TODO:`,`${newJob.description}`, false)
-                  .addField(`COMPLETE:`, `${newJob.complete}`, true)
-                  .addField(`DUE:`,`${date}`, true)
-                  .setFooter(`Assigned by ${message.author.username}`)
+                  db.Job.find({user:assignedUser}).exec((err,jobs)=>{
+                      let overburden = jobs.length
+                    const exampleEmbed = new Discord.RichEmbed()
+                        .setTimestamp(new Date())
+                        .setColor('#724B34')
+                        .setTitle(`Job Assigned`)
+                        .setDescription(`Job ID: ${newJob._id}`)
+                        .addField(`TODO:`,`${newJob.description}`, false)
+                        .addField(`COMPLETE:`, `${newJob.complete}`, true)
+                        .addField(`DUE:`,`${date}`, true)
+                        .setFooter(`Assigned by ${message.author.username}`)
       
               message.channel.send(`${newJob.user} has been assigned a job.`,exampleEmbed);
               message.channel.send(`${newJob.user} currently has ${overburden} jobs assigned.`);
+                  })
+                  
             })
         })
 
