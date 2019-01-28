@@ -58,7 +58,7 @@ module.exports = {
                   }
                   let date = moment(newJob.dueTime).format('MMM Do YY')
                   db.Job.find({user:assignedUser}).exec((err,jobs)=>{
-                      let overburden = jobs.length + 1
+                      let overburden = jobs.length
                     const exampleEmbed = new Discord.RichEmbed()
                         .setTimestamp(new Date())
                         .setColor('#724B34')
