@@ -5,8 +5,6 @@ const db = require('../models')
 const moment = require('moment')
 const client = require('../mybot')
 
-console.log(client.channels)
-
 module.exports = {
     name: 'done',
     description: 'Sets if "Complete" of Job to True.',
@@ -35,6 +33,7 @@ module.exports = {
                 .addField(`DUE:`,`${date}`, true)
   
           message.channel.send(`${found.user} Job has been Completed.`,exampleEmbed);
+          console.log(client.channels)
         //   client.channels.get("493242085831475210").send(`${found.user}'s Job has been Completed.`,exampleEmbed)
 
 
