@@ -15,6 +15,14 @@ app.use('/files', express.static('files'));
 
 const client = new Discord.Client();
 
+let constants = {
+  client: client
+}
+
+module.exports = {
+  constants
+}
+
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
