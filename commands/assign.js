@@ -63,7 +63,7 @@ module.exports = {
                         .setTimestamp(new Date())
                         .setColor('#724B34')
                         .setTitle(`Job Assigned`)
-                        .setDescription(`Job ID: ${newJob._id}`)
+                        .setDescription(`Job ID: ${newJob._id} assigned to ${newJob.user}`)
                         .addField(`TODO:`,`${newJob.description}`, false)
                         .addField(`COMPLETE:`, `${newJob.complete}`, true)
                         .addField(`DUE:`,`${date}`, true)
