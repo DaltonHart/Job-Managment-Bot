@@ -3,7 +3,6 @@
 const Discord = require('discord.js');
 const db = require('../models')
 const moment = require('moment')
-const client = require('../mybot')
 
 module.exports = {
     name: 'done',
@@ -32,8 +31,7 @@ module.exports = {
                 .addField(`COMPLETE:`, `${found.complete}`, true)
                 .addField(`DUE:`,`${date}`, true)
   
-          message.channel.send(`${found.user} Job has been Completed.`,exampleEmbed);
-          console.log(message.client.channels.get("493242085831475210"))
+          message.channel.send(`Job ${found._id} has been completed and recorded to change log.`);
            message.client.channels.get("493242085831475210").send(`${found.user}'s Job has been Completed.`,exampleEmbed)
               }
               

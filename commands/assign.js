@@ -49,6 +49,8 @@ module.exports = {
                 dueTime: dueDate,
                 _id: id
             }
+
+            let overburden = db.Job.find({user:assignedUser}).length
     
             db.Job.create(job, (err, newJob)=>{
                 if (err) {
@@ -66,6 +68,7 @@ module.exports = {
                   .setFooter(`Assigned by ${message.author.username}`)
       
               message.channel.send(`${newJob.user} has been assigned a job.`,exampleEmbed);
+              message.channel.send(`${newJob.user} currently has ${overburden} jobs assigned.`);
             })
         })
 
