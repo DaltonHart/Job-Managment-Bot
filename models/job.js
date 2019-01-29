@@ -5,6 +5,7 @@ const JobSchema = mongoose.Schema({
     description: { type: String, },
 	complete: Boolean,
     dueTime: { type : Date, },
+    assignedDate: {type: Date},
     _id: Number,
     disabled: { type:Boolean, default: false},
     assigner: { type: String, }

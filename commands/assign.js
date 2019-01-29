@@ -19,9 +19,9 @@ module.exports = {
         let commandParts = message.content.split('"')
         let assignedUser = commandParts[2].replace(/\s/g, '');
         let desc = commandParts[1]
-        let dueDate = commandParts[3]
+        let createdDueDate = commandParts[3]
 
-        let dateArr = dueDate.split(' ')
+        let dateArr = createdDueDate.split(' ')
         var filtered = dateArr.filter(function (el) {
             return el != '';
           });
@@ -29,7 +29,7 @@ module.exports = {
             let year = new Date()
             filtered.push(year.toISOString().split('-')[0])
             let finalDate = filtered.join(' ')
-            dueDate = finalDate
+            createdDueDate = finalDate
         }
         
         let id;
@@ -50,7 +50,7 @@ module.exports = {
                 user: assignedUser,
                 description: desc,
                 complete: false,
-                dueTime: dueDate,
+                dueTime: createdDueDate,
                 assigner: assigner,
                 _id: id
             }
@@ -61,19 +61,19 @@ module.exports = {
                 if (err) {
                     console.log('ERROR', err)
                   }
-                  let date = moment(newJob.dueTime).format('MMM Do YY')
+                  let dueDate = moment(newJob.dueTime).format('MMM Do YY')
+                  let assignedDate = moment(newJob.assignedDate)
                   
                   db.Job.find({user:assignedUser}).exec((err,jobs)=>{
                       let overburden = jobs.length
                     const exampleEmbed = new Discord.RichEmbed()
-                        .setTimestamp(new Date())
                         .setColor('#724B34')
-                        .setTitle(`Job Assigned`)
-                        .setDescription(`Job ID: ${newJob._id} assigned to ${newJob.user} by ${newJob.assigner}`)
-                        .addField(`TODO:`,`${newJob.description}`, false)
+                        .setTitle(`**TODO:** ${newJob.description}`)
+                        .setDescription(`Job ID: ${newJob._id} assigned to ${newJob.user}`)
                         .addField(`COMPLETE:`, `${newJob.complete}`, true)
-                        .addField(`DUE:`,`${date}`, true)
-                        .setFooter(`Assigned by ${message.author.username}`)
+                        .addField(`DUE:`,`${dueDate}`, true)
+                        .setFooter(`Assigned by ${newJob.assigner}`)
+                        .setTimestamp(assignedDate)
       
               message.channel.send(exampleEmbed);
               message.channel.send(`${newJob.user} currently has **${overburden} jobs** assigned.`);
