@@ -21,10 +21,7 @@ module.exports = {
                 console.log('ERROR', err)
                return message.channel.send(`Invalid id entered.`);
               } else {
-                let now = moment()
                 let assignedDate = moment(found.assignedDate)
-
-                let inWorks = now.from(found.assignedDate)
 
                 let dueDate = moment(found.dueTime).format('MMM Do YY')
                 let assignedDateFormatted = assignedDate.format('MMM Do YY')
@@ -35,7 +32,6 @@ module.exports = {
                         .setColor('#724B34')
                         .setTitle(`**TODO:** ${found.description}`)
                         .setDescription(`**Job ID:** ${found._id} assigned to ${found.user} \n **Complete:** ${found.complete}   **Due:** ${dueDate} \n **Assigned By:** ${assigner} on ${assignedDateFormatted}`)
-                        .setFooter(`Assigned ${inWorks}`)
                         .setTimestamp(new Date())
   
                 message.channel.send(exampleEmbed);
