@@ -34,7 +34,7 @@ module.exports = {
                         .setTitle(`**TODO:** ${found.description}`)
                         .setDescription(`**Job ID:** ${found._id} assigned to ${found.user} \n **Complete:** ${found.complete}   **Due:** ${dueDate} \n **Assigned By:** ${assigner} on ${assignedDateFormatted}`)
                         .setTimestamp(new Date())
-                        .footer(`Assigned ${inWorks}`)
+                        .setFooter(`Assigned ${inWorks}`)
   
                 message.channel.send(exampleEmbed);
               }
