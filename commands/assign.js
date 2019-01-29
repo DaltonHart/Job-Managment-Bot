@@ -35,12 +35,20 @@ module.exports = {
         let id;
 
         db.Job.find().exec((err,jobs)=>{
-            let total = jobs.length
-            if (total === 0){
-                id = 1
-            } else {
-                id = jobs[total-1]._id + 1
-            }
+            function findMinMax(arr) {
+                let min = arr[0]._id, max = arr[0]._id;
+              
+                for (let i = 1, len=arr.length; i < len; i++) {
+                  let v = arr[i]._id;
+                  min = (v < min) ? v : min;
+                  max = (v > max) ? v : max;
+                }
+              
+                return [min, max];
+              }
+              
+              let max = findMinMax(db)
+              let id = max[1] + 1
 
             console.log(id)
             
