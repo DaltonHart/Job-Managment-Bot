@@ -22,6 +22,7 @@ module.exports = {
                return message.channel.send(`Invalid id entered.`);
               } else {
                 let assignedDate = moment(found.assignedDate)
+                let inWorks = assignedDate.fromNow()
 
                 let dueDate = moment(found.dueTime).format('MMM Do YY')
                 let assignedDateFormatted = assignedDate.format('MMM Do YY')
@@ -33,6 +34,7 @@ module.exports = {
                         .setTitle(`**TODO:** ${found.description}`)
                         .setDescription(`**Job ID:** ${found._id} assigned to ${found.user} \n **Complete:** ${found.complete}   **Due:** ${dueDate} \n **Assigned By:** ${assigner} on ${assignedDateFormatted}`)
                         .setTimestamp(new Date())
+                        .footer(`Assigned ${inWorks}`)
   
                 message.channel.send(exampleEmbed);
               }
