@@ -77,14 +77,15 @@ module.exports = {
                       let overburden = jobs.length
                       let assignerId = newJob.assigner.replace(/\D/g,'')
                       console.log(assignerId)
-                      console.log(message.client.users.get(assignerId))
+                      console.log(message.client.users.get(assignerId).username)
+                      let assigner = message.client.users.get(assignerId).username
                     const exampleEmbed = new Discord.RichEmbed()
                         .setColor('#724B34')
                         .setTitle(`**TODO:** ${newJob.description}`)
                         .setDescription(`Job ID: ${newJob._id} assigned to ${newJob.user}`)
                         .addField(`COMPLETE:`, `${newJob.complete}`, true)
                         .addField(`DUE:`,`${dueDate}`, true)
-                        .setFooter(`Assigned by ${newJob.assigner}`)
+                        .setFooter(`Assigned by ${assigner}`)
                         .setTimestamp(assignedDate)
       
               message.channel.send(exampleEmbed);
