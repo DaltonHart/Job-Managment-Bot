@@ -47,7 +47,7 @@ module.exports = {
                 return [min, max];
               }
               
-              let max = findMinMax(db)
+              let max = findMinMax(jobs)
               let id = max[1] + 1
 
             console.log(id)
