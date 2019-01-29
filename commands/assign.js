@@ -75,8 +75,9 @@ module.exports = {
                   
                   db.Job.find({user:assignedUser}).exec((err,jobs)=>{
                       let overburden = jobs.length
-                      let assigner = message.client.fetchMember(newJob.assigner.replace(/\D/g,'').username)
-                      console.log(assigner)
+                      let assignerId = newJob.assigner.replace(/\D/g,'')
+                      console.log(assignerId)
+                      console.log(message.client.users.get(assignerId))
                     const exampleEmbed = new Discord.RichEmbed()
                         .setColor('#724B34')
                         .setTitle(`**TODO:** ${newJob.description}`)
