@@ -49,8 +49,6 @@ module.exports = {
               
               let max = findMinMax(jobs)
               let id = max[1] + 1
-
-            console.log(id)
             
             let assigner = `<@${message.author.id}>`
 
@@ -76,15 +74,13 @@ module.exports = {
                   db.Job.find({user:assignedUser}).exec((err,jobs)=>{
                       let overburden = jobs.length
                       let assignerId = newJob.assigner.replace(/\D/g,'')
-                      console.log(assignerId)
-                      console.log(message.client.users.get(assignerId).username)
                       let assigner = message.client.users.get(assignerId).username
                     const exampleEmbed = new Discord.RichEmbed()
                         .setColor('#724B34')
                         .setTitle(`**TODO:** ${newJob.description}`)
-                        .setDescription(`Job ID: ${newJob._id} assigned to ${newJob.user}`)
-                        .addField(`COMPLETE:`, `${newJob.complete}`, true)
-                        .addField(`DUE:`,`${dueDate}`, true)
+                        .setDescription(`Job ID: ${newJob._id} assigned to ${newJob.user} /n Complete: ${newJob.complete} Due: ${newJob.complete}`)
+                        // .addField(`COMPLETE:`, `${newJob.complete}`, true)
+                        // .addField(`DUE:`,`${dueDate}`, true)
                         .setFooter(`Assigned by ${assigner}`)
                         .setTimestamp(assignedDate)
       
