@@ -69,6 +69,7 @@ module.exports = {
                   }
                   let dueDate = moment(newJob.dueTime).format('MMM Do YY')
                   let assignedDate = moment(newJob.assignedDate)
+                  let inWorks = assignedDate.fromNow();
                   
                   
                   db.Job.find({user:assignedUser}).exec((err,jobs)=>{
@@ -78,11 +79,11 @@ module.exports = {
                     const exampleEmbed = new Discord.RichEmbed()
                         .setColor('#724B34')
                         .setTitle(`**TODO:** ${newJob.description}`)
-                        .setDescription(`**Job ID:** ${newJob._id} assigned to ${newJob.user} \n **Complete:** ${newJob.complete}   **Due:** ${newJob.complete}`)
+                        .setDescription(`**Job ID:** ${newJob._id} assigned to ${newJob.user} \n **Complete:** ${newJob.complete}   **Due:** ${newJob.complete} \n **Assigned By:** ${assigner} on ${assignedDate}`)
                         // .addField(`COMPLETE:`, `${newJob.complete}`, true)
                         // .addField(`DUE:`,`${dueDate}`, true)
-                        .setFooter(`Assigned by ${assigner}`)
-                        .setTimestamp(assignedDate)
+                        .setFooter(`Assigned ${inWorks}`)
+                        .setTimestamp(new Date())
       
               message.channel.send(exampleEmbed);
               message.channel.send(`${newJob.user} currently has **${overburden} jobs** assigned.`);
