@@ -41,8 +41,11 @@ module.exports = {
             } else {
                 id = jobs[total-1]._id + 1
             }
+
+            console.log(id)
             
             let assigner = `<@${message.author.id}>`
+
             let job = {
                 user: assignedUser,
                 description: desc,
