@@ -22,12 +22,15 @@ module.exports = {
                return message.channel.send(`Invalid id entered.`);
               } else {
                 let now = moment()
-                let dueDate = moment(found.dueTime).format('MMM Do YY')
                 let assignedDate = moment(found.assignedDate)
-                let inWorks = now.to(assignedDate)
+
+                let inWorks = assignedDate.to(now)
+
+                let dueDate = moment(found.dueTime).format('MMM Do YY')
                 let assignedDateFormatted = assignedDate.format('MMM Do YY')
                 let assignerId = found.assigner.replace(/\D/g,'')
                 let assigner = message.client.users.get(assignerId).username
+
                     const exampleEmbed = new Discord.RichEmbed()
                         .setColor('#724B34')
                         .setTitle(`**TODO:** ${found.description}`)
