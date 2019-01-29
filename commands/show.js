@@ -21,17 +21,20 @@ module.exports = {
                 console.log('ERROR', err)
                return message.channel.send(`Invalid id entered.`);
               } else {
-                let date = moment(found.dueTime).format('MMM Do YY')
-                const exampleEmbed = new Discord.RichEmbed()
-                .setTimestamp(new Date())
-                .setColor('#724B34')
-                .setTitle(`Job`)
-                .setDescription(`Job ID: ${found._id}`)
-                .addField(`TODO:`,`${found.description}`, false)
-                .addField(`COMPLETE:`, `${found.complete}`, true)
-                .addField(`DUE:`,`${date}`, true)
+                let dueDate = moment(found.dueTime).format('MMM Do YY')
+                let assignedDate = moment(found.assignedDate)
+                let inWorks = assignedDate.fromNow()
+                let assignedDateFormatted = assignedDate.format('MMM Do YY')
+                let assignerId = found.assigner.replace(/\D/g,'')
+                let assigner = message.client.users.get(assignerId).username
+                    const exampleEmbed = new Discord.RichEmbed()
+                        .setColor('#724B34')
+                        .setTitle(`**TODO:** ${found.description}`)
+                        .setDescription(`**Job ID:** ${found._id} assigned to ${found.user} \n **Complete:** ${found.complete}   **Due:** ${dueDate} \n **Assigned By:** ${assigner} on ${assignedDateFormatted}`)
+                        .setFooter(`Assigned ${inWorks}`)
+                        .setTimestamp(new Date())
   
-          message.channel.send(`${found.user} Job`,exampleEmbed);
+                message.channel.send(exampleEmbed);
               }
               
         })
