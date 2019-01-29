@@ -24,7 +24,7 @@ module.exports = {
                 let now = moment()
                 let assignedDate = moment(found.assignedDate)
 
-                let inWorks = found.assignedDate.to(now)
+                let inWorks = now.from(found.assignedDate)
 
                 let dueDate = moment(found.dueTime).format('MMM Do YY')
                 let assignedDateFormatted = assignedDate.format('MMM Do YY')
