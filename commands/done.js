@@ -12,8 +12,12 @@ module.exports = {
     execute(message, args) {
         let id = args[0]
 
+        let userRequested = `<@${message.author.id}>`
+
         let updatedJob = {
-            complete: true
+            complete: true,
+            completedBy: userRequested,
+            completedOn: new Date()
         }
 
         db.Job.findOneAndUpdate({_id:id},updatedJob,{new:true}, (err, found)=>{

@@ -13,7 +13,7 @@ module.exports = {
     aliases: [],
     usage: '',
     execute(message, args) {
-        let userRequested = ` <@${message.author.id}> `
+        let userRequested = `<@${message.author.id}>`
         db.Job.find({user:userRequested}).exec((err,jobs)=>{
 
             function compare(a, b) {

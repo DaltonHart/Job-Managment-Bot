@@ -10,9 +10,10 @@ Bot1234!
 1) !showX
 -- Send user DM of their X most recently due jobs.
 
+-------------------------
 2) Overburden Warning
 -- Issue a warning when a user is assigned more than Y jobs
-
+-------------------------
 3) Publish to Changelog
 -- Completed jobs (whether in channel, or via DM) should populate in #changelog
 
@@ -21,11 +22,11 @@ Bot1234!
 
 5/6) Improve Job Blurb Box
 -- Include the following data in the Job Blurb bottom (ideally, very small fonts):
----- Assigned By: (@username)
----- Assigned To: (@username)
----- Assigned On: (DD/MM/YYY)
----- Completed By: (@username)
----- Completed On: (DD/MM/YYYY)
+---- Assigned By: (@username) -
+---- Assigned To: (@username) -
+---- Assigned On: (DD/MM/YYY) -
+---- Completed By: (@username) -
+---- Completed On: (DD/MM/YYYY) -
 ---- Transfers: (string "@username1, @username2, @username3, @username4")
 
 7) Due Date improvements

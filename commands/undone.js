@@ -13,7 +13,9 @@ module.exports = {
         let id = args[0]
 
         let updatedJob = {
-            complete: false
+            complete: false,
+            completedBy: 'NA',
+            completedOn: new Date()
         }
 
         db.Job.findOneAndUpdate({_id:id},updatedJob,{new:true}, (err, found)=>{

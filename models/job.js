@@ -8,7 +8,9 @@ const JobSchema = mongoose.Schema({
     assignedDate: {type: Date},
     _id: Number,
     disabled: { type:Boolean, default: false},
-    assigner: { type: String, }
+    assigner: { type: String, },
+    completedBy:{ type: String, },
+    completedOn:{ type: String, }
 })
 
 module.exports = mongoose.model('Job', JobSchema)

@@ -59,7 +59,8 @@ module.exports = {
                 dueTime: createdDueDate,
                 assigner: assigner,
                 assignedDate: new Date(),
-                _id: id
+                _id: id,
+                completedBy: 'NA',
             }
 
             
@@ -81,14 +82,12 @@ module.exports = {
                     const exampleEmbed = new Discord.RichEmbed()
                         .setColor('#724B34')
                         .setTitle(`**TODO:** ${newJob.description}`)
-                        .setDescription(`**Job ID:** ${newJob._id} assigned to ${newJob.user} \n **Complete:** ${newJob.complete}   **Due:** ${dueDate} \n **Assigned By:** ${assigner} on ${assignedDateFormatted}`)
-                        // .addField(`COMPLETE:`, `${newJob.complete}`, true)
-                        // .addField(`DUE:`,`${dueDate}`, true)
+                        .setDescription(`**Job ID:** ${newJob._id} assigned to ${newJob.user} \n **Complete:** ${newJob.complete}   **Due:** ${dueDate} \n **Assigned By:** ${assigner} on ${assignedDateFormatted} \n **Completed By:** ${newJob.completedBy} **Completed On:** ${newJob.completedOn}`)
                         .setFooter(`Assigned ${inWorks}`)
                         .setTimestamp(new Date())
       
-              message.channel.send(exampleEmbed);
-              message.channel.send(`${newJob.user} currently has **${overburden} jobs** assigned.`);
+                message.channel.send(exampleEmbed);
+                message.channel.send(`${newJob.user} currently has **${overburden} jobs** assigned.`);
                   })
                   
             })

@@ -27,7 +27,7 @@ module.exports = {
     execute(message, args) {
         let id = args[0]
         let updatedJob = {
-            disbaled: false
+            disbaled: false,
         }
 
         db.Job.findOneAndUpdate({_id:id},updatedJob,{new:true}, (err, found)=>{
