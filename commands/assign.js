@@ -68,8 +68,9 @@ module.exports = {
                     console.log('ERROR', err)
                   }
                   let dueDate = moment(newJob.dueTime).format('MMM Do YY')
-                  let assignedDate = moment(newJob.assignedDate).format('MMM Do YY')
+                  let assignedDate = moment(newJob.assignedDate)
                   let inWorks = assignedDate.fromNow()
+                  let assignedDateFormatted = assignedDate.format('MMM Do YY')
                   
                   
                   db.Job.find({user:assignedUser}).exec((err,jobs)=>{
@@ -79,7 +80,7 @@ module.exports = {
                     const exampleEmbed = new Discord.RichEmbed()
                         .setColor('#724B34')
                         .setTitle(`**TODO:** ${newJob.description}`)
-                        .setDescription(`**Job ID:** ${newJob._id} assigned to ${newJob.user} \n **Complete:** ${newJob.complete}   **Due:** ${dueDate} \n **Assigned By:** ${assigner} on ${assignedDate}`)
+                        .setDescription(`**Job ID:** ${newJob._id} assigned to ${newJob.user} \n **Complete:** ${newJob.complete}   **Due:** ${dueDate} \n **Assigned By:** ${assigner} on ${assignedDateFormatted}`)
                         // .addField(`COMPLETE:`, `${newJob.complete}`, true)
                         // .addField(`DUE:`,`${dueDate}`, true)
                         .setFooter(`Assigned ${inWorks}`)
