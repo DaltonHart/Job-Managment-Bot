@@ -58,6 +58,7 @@ module.exports = {
                 complete: false,
                 dueTime: createdDueDate,
                 assigner: assigner,
+                assignedDate: new Date(),
                 _id: id
             }
 
