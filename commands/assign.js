@@ -74,8 +74,6 @@ module.exports = {
                   let inWorks = assignedDate.fromNow()
                   let assignedDateFormatted = assignedDate.format('MMM Do YYYY')
                   
-                  
-                  
                   db.Job.find({user:assignedUser}).exec((err,jobs)=>{
                       let overburden = jobs.length
                       let assignerId = newJob.assigner.replace(/\D/g,'')
@@ -88,10 +86,12 @@ module.exports = {
                           complete = 'Complete'
                       }
 
+
+
                     const exampleEmbed = new Discord.RichEmbed()
                         .setColor('#724B34')
                         .setTitle(`**TODO:** ${newJob.description}`)
-                        .setDescription(`**Job ID:** ${newJob._id} assigned to ${newJob.user} \n **Complete:** ${newJob.complete}   **Due:** ${dueDate} \n **Assigned By:** ${assigner} on ${assignedDateFormatted} \n **Completed By:** ${newJob.completedBy} **${complete}**`)
+                        .setDescription(`**Job ID:** ${newJob._id} assigned to ${newJob.user} \n **${complete}**   **Due:** ${dueDate} \n **Assigned By:** ${assigner} on ${assignedDateFormatted}`)
                         .setFooter(`Assigned ${inWorks}`)
                         .setTimestamp(new Date())
       
