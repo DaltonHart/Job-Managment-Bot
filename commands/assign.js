@@ -69,10 +69,10 @@ module.exports = {
                 if (err) {
                     console.log('ERROR', err)
                   }
-                  let dueDate = moment(newJob.dueTime).format('MMM Do YY')
+                  let dueDate = moment(newJob.dueTime).format('MMM Do YYYY')
                   let assignedDate = moment(newJob.assignedDate)
                   let inWorks = assignedDate.fromNow()
-                  let assignedDateFormatted = assignedDate.format('MMM Do YY')
+                  let assignedDateFormatted = assignedDate.format('MMM Do YYYY')
                   
                   
                   
@@ -81,11 +81,13 @@ module.exports = {
                       let assignerId = newJob.assigner.replace(/\D/g,'')
                       let assigner = message.client.users.get(assignerId).username
                       let complete;
+
                       if (newJob.complete === false){
                           complete = 'Incomplete'
                       } else {
                           complete = 'Complete'
                       }
+
                     const exampleEmbed = new Discord.RichEmbed()
                         .setColor('#724B34')
                         .setTitle(`**TODO:** ${newJob.description}`)

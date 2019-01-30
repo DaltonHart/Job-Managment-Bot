@@ -22,7 +22,7 @@ module.exports = {
                 console.log('ERROR', err)
             }
             jobs.forEach((job)=>{
-                let date = moment(job.dueTime).format('MMM Do YY')
+                let date = moment(job.dueTime).format('MMM Do YYYY')
                 const exampleEmbed = new Discord.RichEmbed()
                   .setTimestamp(new Date())
                   .setColor('#724B34')

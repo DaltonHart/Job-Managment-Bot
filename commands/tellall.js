@@ -32,7 +32,7 @@ module.exports = {
             jobs.forEach((job)=>{
                 let momentToday = moment()
                 let momentJobDate = moment(job.dueTime)
-                let date = momentJobDate.format('MMM Do YY')
+                let date = momentJobDate.format('MMM Do YYYY')
 
                 if (momentToday > momentJobDate){
                     let embed = new Discord.RichEmbed()

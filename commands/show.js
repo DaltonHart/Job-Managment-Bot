@@ -24,8 +24,8 @@ module.exports = {
                 let assignedDate = moment(found.assignedDate)
                 let inWorks = assignedDate.fromNow()
 
-                let dueDate = moment(found.dueTime).format('MMM Do YY')
-                let assignedDateFormatted = assignedDate.format('MMM Do YY')
+                let dueDate = moment(found.dueTime).format('MMM Do YYYY')
+                let assignedDateFormatted = assignedDate.format('MMM Do YYYY')
                 let assignerId = found.assigner.replace(/\D/g,'')
                 let assigner = message.client.users.get(assignerId).username
 

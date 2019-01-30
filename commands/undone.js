@@ -23,7 +23,7 @@ module.exports = {
                 console.log('ERROR', err)
                return message.channel.send(`Invalid id entered.`);
               }
-              let date = moment(found.dueTime).format('MMM Do YY')
+              let date = moment(found.dueTime).format('MMM Do YYYY')
               const exampleEmbed = new Discord.RichEmbed()
               .setTimestamp(new Date())
               .setColor('#724B34')
