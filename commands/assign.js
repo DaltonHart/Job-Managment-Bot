@@ -4,7 +4,7 @@
 // - Associate "job" to an @user
 // - Associate a due time to the "job"
 // - Associate boolean "complete" to false
-// !assign [description] [user] [due time] 
+// !assign [description] [user] [due time] edit* wants days to return as number to add to current date with default of 3 if none given
 
 const Discord = require('discord.js');
 const db = require('../models')
@@ -14,23 +14,43 @@ module.exports = {
     name: 'assign',
     description: 'A command to set a job to a taged user.',
     args: true,
-    usage: '"<description>" <user> "<due date>"',
+    usage: '"<description>" <user> "<number of days till due>"',
     execute(message, args) {
         let commandParts = message.content.split('"')
         let assignedUser = commandParts[2].replace(/\s/g, '');
         let desc = commandParts[1]
-        let createdDueDate = commandParts[3]
+        let createdDueDate;
+        let today = new Date()
 
-        let dateArr = createdDueDate.split(' ')
-        var filtered = dateArr.filter(function (el) {
-            return el != '';
-          });
-        if (filtered.length <= 2){
-            let year = new Date()
-            filtered.push(year.toISOString().split('-')[0])
-            let finalDate = filtered.join(' ')
-            createdDueDate = finalDate
+        function addDays(startDate,numberOfDays){
+                let returnDate = new Date(
+                startDate.getFullYear(),
+                startDate.getMonth(),
+                startDate.getDate()+numberOfDays,
+                startDate.getHours(),
+                startDate.getMinutes(),
+                startDate.getSeconds());
+                return returnDate;
+                }
+
+        if (commandParts[3]){
+            let text = commandParts[3];
+            let finalNumber = parseInt(text, 10);
+            createdDueDate = addDays(today, finalNumber)
+        } else {
+            createdDueDate = addDays(today, 3)
         }
+
+        // let dateArr = createdDueDate.split(' ')
+        // var filtered = dateArr.filter(function (el) {
+        //     return el != '';
+        //   });
+        // if (filtered.length <= 2){
+        //     let year = new Date()
+        //     filtered.push(year.toISOString().split('-')[0])
+        //     let finalDate = filtered.join(' ')
+        //     createdDueDate = finalDate
+        // }
         
         let id;
 
