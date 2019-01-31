@@ -23,6 +23,7 @@ module.exports = {
         db.Job.find({
             user: userRequested
         }).exec((err, jobs) => {
+            console.log('jobs found in db',jobs)
             if (err) {
                 console.log('ERROR', err)
                 return message.channel.send(`No user found jobs.`);
@@ -40,8 +41,10 @@ module.exports = {
                         return comparison;
                     }
                     jobs.sort(compare)
+                    console.log('jobs sorted', jobs)
                     for (i = 0; i > finalAmount; i++) {
                         found = jobs[i]
+                        console.log('found',found)
 
                         let assignedDate = moment(found.assignedDate)
                         let inWorks = assignedDate.fromNow()
