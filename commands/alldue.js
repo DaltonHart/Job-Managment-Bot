@@ -37,7 +37,7 @@ module.exports = {
                 }
                 filterJobs.sort(compare)
 
-                filterJobs.forEach((job) => {
+                filterJobs.forEach((found) => {
                     let momentToday = moment()
                     let momentJob = moment(found.dueTime)
                     let date = momentJob.format('MMM Do YYYY')
