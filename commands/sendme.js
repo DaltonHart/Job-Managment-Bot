@@ -42,39 +42,44 @@ module.exports = {
                     }
                     jobs.sort(compare)
                     console.log('jobs sorted', jobs)
-                    for (i = 0; i > finalAmount; i++) {
-                        found = jobs[i]
-                        console.log('found',found)
-
-                        let assignedDate = moment(found.assignedDate)
-                        let inWorks = assignedDate.fromNow()
-                        let dueDate = moment(found.dueTime).format('MMM Do YYYY')
-                        let assignedDateFormatted = assignedDate.format('MMM Do YYYY')
-                        let assignerId = found.assigner.replace(/\D/g, '')
-                        let assigner = message.client.users.get(assignerId).username
-                        let complete;
-                        let completedDate;
-
-                        if (found.complete === false) {
-                            complete = 'Incomplete'
-                        } else {
-                            complete = 'Complete'
+                    let messageLoop = (jobs)=>{
+                        for (i = 0; i >= finalAmount; i++) {
+                            found = jobs[i]
+                            console.log('found',found)
+    
+                            let assignedDate = moment(found.assignedDate)
+                            let inWorks = assignedDate.fromNow()
+                            let dueDate = moment(found.dueTime).format('MMM Do YYYY')
+                            let assignedDateFormatted = assignedDate.format('MMM Do YYYY')
+                            let assignerId = found.assigner.replace(/\D/g, '')
+                            let assigner = message.client.users.get(assignerId).username
+                            let complete;
+                            let completedDate;
+    
+                            if (found.complete === false) {
+                                complete = 'Incomplete'
+                            } else {
+                                complete = 'Complete'
+                            }
+                            if (found.completedDate) {
+                                completedDate = moment(found.completedDate).format('MMM Do YYYY')
+                            } else {
+                                completedDate = 'Not yet Completed'
+                            }
+    
+                            const exampleEmbed = new Discord.RichEmbed()
+                                .setColor('#724B34')
+                                .setTitle(`**TODO:** ${found.description}`)
+                                .setDescription(`**Job ID:** ${found._id} assigned to ${found.user} \n **${complete}**   **Due:** ${dueDate} \n **Assigned By:** ${assigner} on ${assignedDateFormatted} \n **Completed By:** ${found.completedBy}  **Completed On:** ${completedDate}`)
+                                .setTimestamp(new Date())
+                                .setFooter(`Assigned ${inWorks}`)
+    
+                                message.author.send(exampleEmbed)
                         }
-                        if (found.completedDate) {
-                            completedDate = moment(found.completedDate).format('MMM Do YYYY')
-                        } else {
-                            completedDate = 'Not yet Completed'
-                        }
 
-                        const exampleEmbed = new Discord.RichEmbed()
-                            .setColor('#724B34')
-                            .setTitle(`**TODO:** ${found.description}`)
-                            .setDescription(`**Job ID:** ${found._id} assigned to ${found.user} \n **${complete}**   **Due:** ${dueDate} \n **Assigned By:** ${assigner} on ${assignedDateFormatted} \n **Completed By:** ${found.completedBy}  **Completed On:** ${completedDate}`)
-                            .setTimestamp(new Date())
-                            .setFooter(`Assigned ${inWorks}`)
-
-                            message.author.send(exampleEmbed)
                     }
+                    messageLoop(jobs)
+                    
                 }
             }
 
