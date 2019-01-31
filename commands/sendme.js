@@ -45,7 +45,7 @@ module.exports = {
                     let messageLoop = (jobs)=>{
                         console.log('loop func activated')
                         console.log(finalAmount)
-                        for (i = 0; i >= finalAmount; i++) {
+                        for (i = 0; i <= finalAmount; i++) {
                             found = jobs[i]
                             console.log('found',found)
     
