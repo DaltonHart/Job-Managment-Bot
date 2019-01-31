@@ -94,7 +94,7 @@ module.exports = {
                     const exampleEmbed = new Discord.RichEmbed()
                         .setColor('#724B34')
                         .setTitle(`**TODO:** ${newJob.description}`)
-                        .setDescription(`**Job ID:** ${newJob._id} assigned to ${newJob.user} \n **${complete}**   **Due:** ${dueDate} \n **Assigned By:** ${assigner} on ${assignedDateFormatted}`)
+                        .setDescription(`**Job ID:** ${newJob._id} assigned to ${newJob.user} \n **Due:** ${dueDate} **${complete}** \n **Assigned By:** ${assigner} on ${assignedDateFormatted}`)
                         .setFooter(`Assigned ${inWorks}`)
                         .setTimestamp(new Date())
       

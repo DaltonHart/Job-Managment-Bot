@@ -1,11 +1,3 @@
-//!show5
-
-//!show JobID to just summon that text block
-
-//!transfer "jobID" @newusername
-
-// !done job#
-// - Change "complete" boolean of job to true
 const Discord = require('discord.js');
 const db = require('../models')
 const moment = require('moment')
@@ -16,14 +8,12 @@ module.exports = {
     args: true,
     usage: '<number of jobs requested>',
     execute(message, args) {
-        console.log('sendme activated')
         let userRequested = `<@${message.author.id}>`
         let amount = args[0]
         let finalAmount = parseInt(amount, 10);
         db.Job.find({
             user: userRequested
         }).exec((err, jobs) => {
-            console.log('jobs found in db',jobs)
             if (err) {
                 console.log('ERROR', err)
                 return message.channel.send(`No user found jobs.`);
@@ -41,13 +31,13 @@ module.exports = {
                         return comparison;
                     }
                     jobs.sort(compare)
-                    console.log('jobs sorted', jobs)
                     let messageLoop = (jobs)=>{
-                        console.log('loop func activated')
-                        console.log(finalAmount)
-                        for (i = 0; i <= finalAmount; i++) {
+                        for (i = 0; i < finalAmount; i++) {
                             found = jobs[i]
-                            console.log('found',found)
+
+                            let momentToday = moment()
+                            let momentJob = moment(job.dueTime)
+                            let date = momentJobDate.format('MMM Do YYYY')
     
                             let assignedDate = moment(found.assignedDate)
                             let inWorks = assignedDate.fromNow()
@@ -68,15 +58,30 @@ module.exports = {
                             } else {
                                 completedDate = 'Not yet Completed'
                             }
-    
-                            const exampleEmbed = new Discord.RichEmbed()
-                                .setColor('#724B34')
+
+                            if (momentToday > momentJob){
+                                const exampleEmbed = new Discord.RichEmbed()
+                                .setColor('#C82233')
                                 .setTitle(`**TODO:** ${found.description}`)
-                                .setDescription(`**Job ID:** ${found._id} assigned to ${found.user} \n **${complete}**   **Due:** ${dueDate} \n **Assigned By:** ${assigner} on ${assignedDateFormatted} \n **Completed By:** ${found.completedBy}  **Completed On:** ${completedDate}`)
+                                .setDescription(`**Job ID:** ${found._id} assigned to ${found.user} \n **Due:** ${dueDate} **${complete}** \n **Assigned By:** ${assigner} on ${assignedDateFormatted} \n **Completed By:** ${found.completedBy}  **Completed On:** ${completedDate}`)
                                 .setTimestamp(new Date())
                                 .setFooter(`Assigned ${inWorks}`)
     
                                 message.author.send(exampleEmbed)
+
+                            } else {
+                                const exampleEmbed = new Discord.RichEmbed()
+                                .setColor('#33CD32')
+                                .setTitle(`**TODO:** ${found.description}`)
+                                .setDescription(`**Job ID:** ${found._id} assigned to ${found.user} \n **Due:** ${dueDate} **${complete}** \n **Assigned By:** ${assigner} on ${assignedDateFormatted} \n **Completed By:** ${found.completedBy}  **Completed On:** ${completedDate}`)
+                                .setTimestamp(new Date())
+                                .setFooter(`Assigned ${inWorks}`)
+    
+                                message.author.send(exampleEmbed)
+
+                            }
+    
+                            
                         }
                     }
                     messageLoop(jobs)
