@@ -20,26 +20,47 @@ module.exports = {
             completedOn: new Date()
         }
 
-        db.Job.findOneAndUpdate({_id:id},updatedJob,{new:true}, (err, found)=>{
+        db.Job.findOneAndUpdate({
+            _id: id
+        }, updatedJob, {
+            new: true
+        }, (err, found) => {
             if (err) {
                 console.log('ERROR', err)
-               return message.channel.send(`Invalid id entered.`);
-              } else {
-                let date = moment(found.dueTime).format('MMM Do YYYY')
+                return message.channel.send(`Invalid id entered.`);
+            } else {
+                let assignedDate = moment(found.assignedDate)
+                let inWorks = assignedDate.fromNow()
+                let dueDate = moment(found.dueTime).format('MMM Do YYYY')
+                let assignedDateFormatted = assignedDate.format('MMM Do YYYY')
+                let assignerId = found.assigner.replace(/\D/g, '')
+                let assigner = message.client.users.get(assignerId).username
+                let complete;
+                let completedDate;
+
+                if (found.complete === false) {
+                    complete = 'Incomplete'
+                } else {
+                    complete = 'Complete'
+                }
+                if (found.completedDate) {
+                    completedDate = moment(found.completedDate).format('MMM Do YYYY')
+                } else {
+                    completedDate = 'Not yet Completed'
+                }
+
                 const exampleEmbed = new Discord.RichEmbed()
-                .setTimestamp(new Date())
-                .setColor('#724B34')
-                .setTitle(`Job Completed`)
-                .setDescription(`Job ID: ${found._id}`)
-                .addField(`TODO:`,`${found.description}`, false)
-                .addField(`COMPLETE:`, `${found.complete}`, true)
-                .addField(`DUE:`,`${date}`, true)
-  
-          message.channel.send(`Job ${found._id} has been completed and recorded to change log.`);
-           message.client.channels.get("493242085831475210").send(`${found.user}'s Job has been Completed.`,exampleEmbed)
-              }
-              
+                    .setColor('#C82233')
+                    .setTitle(`**TODO:** ${found.description}`)
+                    .setDescription(`**Job ID:** ${found._id} assigned to ${found.user} \n **Due:** ${dueDate} **${complete}** \n **Assigned By:** ${assigner} on ${assignedDateFormatted} \n **Completed By:** ${found.completedBy}  **Completed On:** ${completedDate}`)
+                    .setTimestamp(new Date())
+                    .setFooter(`Assigned ${inWorks}`)
+
+                message.channel.send(`Job ${found._id} has been completed and recorded to change log.`);
+                message.client.channels.get("493242085831475210").send(exampleEmbed)
+            }
+
         })
     },
-    
+
 };
