@@ -40,20 +40,7 @@ module.exports = {
         } else {
             createdDueDate = addDays(today, 3)
         }
-
-        // let dateArr = createdDueDate.split(' ')
-        // var filtered = dateArr.filter(function (el) {
-        //     return el != '';
-        //   });
-        // if (filtered.length <= 2){
-        //     let year = new Date()
-        //     filtered.push(year.toISOString().split('-')[0])
-        //     let finalDate = filtered.join(' ')
-        //     createdDueDate = finalDate
-        // }
         
-        let id;
-
         db.Job.find().exec((err,jobs)=>{
             function findMinMax(arr) {
                 let min = arr[0]._id, max = arr[0]._id;
@@ -83,8 +70,6 @@ module.exports = {
                 completedBy: 'NA',
             }
 
-            
-    
             db.Job.create(job, (err, newJob)=>{
                 if (err) {
                     console.log('ERROR', err)
@@ -106,8 +91,6 @@ module.exports = {
                           complete = 'Complete'
                       }
 
-
-
                     const exampleEmbed = new Discord.RichEmbed()
                         .setColor('#724B34')
                         .setTitle(`**TODO:** ${newJob.description}`)
@@ -118,7 +101,6 @@ module.exports = {
                 message.channel.send(exampleEmbed);
                 message.channel.send(`${newJob.user} currently has **${overburden} jobs** assigned.`);
                   })
-                  
             })
         })
 
