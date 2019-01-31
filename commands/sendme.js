@@ -43,6 +43,8 @@ module.exports = {
                     jobs.sort(compare)
                     console.log('jobs sorted', jobs)
                     let messageLoop = (jobs)=>{
+                        console.log('loop func activated')
+                        console.log(finalAmount)
                         for (i = 0; i >= finalAmount; i++) {
                             found = jobs[i]
                             console.log('found',found)
@@ -76,7 +78,6 @@ module.exports = {
     
                                 message.author.send(exampleEmbed)
                         }
-
                     }
                     messageLoop(jobs)
                     
