@@ -12,10 +12,11 @@ const moment = require('moment')
 
 module.exports = {
     name: 'sendme',
-    description: 'Shows X number of most recent Jobs.',
+    description: 'Shows X number of most recent Jobs Dm to user.',
     args: true,
     usage: '<number of jobs requested>',
     execute(message, args) {
+        console.log('sendme activated')
         let userRequested = `<@${message.author.id}>`
         let amount = args[0]
         let finalAmount = parseInt(amount, 10);
@@ -69,7 +70,7 @@ module.exports = {
                             .setTimestamp(new Date())
                             .setFooter(`Assigned ${inWorks}`)
 
-                        message.channel.send(exampleEmbed);
+                            message.author.send(exampleEmbed)
                     }
                 }
             }
