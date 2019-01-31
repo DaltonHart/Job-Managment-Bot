@@ -37,7 +37,7 @@ module.exports = {
 
                             let momentToday = moment()
                             let momentJob = moment(found.dueTime)
-                            let date = momentJobDate.format('MMM Do YYYY')
+                            let date = momentJob.format('MMM Do YYYY')
     
                             let assignedDate = moment(found.assignedDate)
                             let inWorks = assignedDate.fromNow()
