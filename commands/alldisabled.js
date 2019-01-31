@@ -17,22 +17,42 @@ module.exports = {
     usage: '',
     execute(message, args) {
 
-        db.Job.find({disabled:true}).exec((err,jobs)=>{
+        db.Job.find({
+            disabled: true
+        }).exec((err, jobs) => {
             if (err) {
                 console.log('ERROR', err)
             }
-            jobs.forEach((job)=>{
-                let date = moment(job.dueTime).format('MMM Do YYYY')
+            jobs.forEach((found) => {
+
+                let assignedDate = moment(found.assignedDate)
+                let inWorks = assignedDate.fromNow()
+                let dueDate = moment(found.dueTime).format('MMM Do YYYY')
+                let assignedDateFormatted = assignedDate.format('MMM Do YYYY')
+                let assignerId = found.assigner.replace(/\D/g, '')
+                let assigner = message.client.users.get(assignerId).username
+                let complete;
+                let completedDate;
+
+                if (found.complete === false) {
+                    complete = 'Incomplete'
+                } else {
+                    complete = 'Complete'
+                }
+                if (found.completedDate) {
+                    completedDate = moment(found.completedDate).format('MMM Do YYYY')
+                } else {
+                    completedDate = 'Not yet Completed'
+                }
                 const exampleEmbed = new Discord.RichEmbed()
-                  .setTimestamp(new Date())
-                  .setColor('#724B34')
-                  .setTitle(`Job`)
-                  .setDescription(`Job ID: ${job._id}`)
-                  .addField(`TODO:`,`${job.description}`, false)
-                  .addField(`COMPLETE:`, `${job.complete}`, true)
-                  .addField(`DUE:`,`${date}`, true)
-      
-              message.channel.send(`Assigned: ${job.user}`,exampleEmbed);
+                    .setColor('#000000')
+                    .setTitle(`**TODO:** ${found.description}`)
+                    .setDescription(`**Job ID:** ${found._id} assigned to ${found.user} \n **Due:** ${dueDate} **${complete}** \n **Assigned By:** ${assigner} on ${assignedDateFormatted} \n **Completed By:** ${found.completedBy}  **Completed On:** ${completedDate}`)
+                    .setTimestamp(new Date())
+                    .setFooter(`Assigned ${inWorks}`)
+
+                message.channel.send(exampleEmbed)
+
             })
         })
     },
