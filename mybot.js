@@ -1,6 +1,6 @@
 const    
     Discord = require("discord.js"),
-    { prefix, token, } = require('./config.json'),
+    { prefix, } = require('./config.json'),
     fs = require('fs'),
     cooldowns = new Discord.Collection(),
     express = require('express'),
@@ -8,6 +8,8 @@ const
     db = require('./models'),
     moment = require('moment'),
     cron = require('node-cron');
+
+    require('dotenv').config();
 
     require('heroku-self-ping')(`https://${process.env.HEROKU_APP_NAME}.herokuapp.com`);
 
@@ -59,7 +61,7 @@ client.on("message", (message) => {
   
 });
 
-client.login(token);
+client.login(process.env.TOKEN);
 
 app.listen(process.env.PORT || 8000, ()=>{
   console.log('Listening to port');

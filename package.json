@@ -23,6 +23,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "discord.js": "^11.4.2",
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "giphy-api": "^1.2.7",
     "got": "^9.0.0",
