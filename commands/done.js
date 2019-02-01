@@ -54,7 +54,7 @@ module.exports = {
                     .setTimestamp(new Date())
                     .setFooter(`Assigned ${inWorks}`)
 
-                message.channel.send(`Job ${found._id} has been completed and recorded to change log.`);
+                message.channel.send(`Job ${found._id} has been completed and recorded to change log.`, exampleEmbed);
                 //message.client.channels.get("493242085831475210").send(exampleEmbed)
             }
 
