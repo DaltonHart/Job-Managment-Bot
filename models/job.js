@@ -10,7 +10,7 @@ const JobSchema = mongoose.Schema({
     disabled: { type:Boolean, default: false},
     assigner: { type: String, },
     completedBy:{ type: String, },
-    completedOn:{ type: String, }
+    completedOn:{ type: Date, }
 })
 
 module.exports = mongoose.model('Job', JobSchema)

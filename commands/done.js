@@ -11,9 +11,7 @@ module.exports = {
     usage: '<job id>',
     execute(message, args) {
         let id = args[0]
-
         let userRequested = `<@${message.author.id}>`
-
         let updatedJob = {
             complete: true,
             completedBy: userRequested,
@@ -50,14 +48,14 @@ module.exports = {
                 }
 
                 const exampleEmbed = new Discord.RichEmbed()
-                    .setColor('#C82233')
+                    .setColor('#724B34')
                     .setTitle(`**TODO:** ${found.description}`)
                     .setDescription(`**Job ID:** ${found._id} assigned to ${found.user} \n **Due:** ${dueDate} **${complete}** \n **Assigned By:** ${assigner} on ${assignedDateFormatted} \n **Completed By:** ${found.completedBy}  **Completed On:** ${completedDate}`)
                     .setTimestamp(new Date())
                     .setFooter(`Assigned ${inWorks}`)
 
                 message.channel.send(`Job ${found._id} has been completed and recorded to change log.`);
-                message.client.channels.get("493242085831475210").send(exampleEmbed)
+                //message.client.channels.get("493242085831475210").send(exampleEmbed)
             }
 
         })
