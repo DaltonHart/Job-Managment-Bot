@@ -28,13 +28,10 @@ module.exports = {
 
                 if (found.complete === false) {
                     complete = 'Incomplete'
+                    completedDate = 'Not yet Completed'
                 } else {
                     complete = 'Complete'
-                }
-                if (found.completedDate) {
-                    completedDate = moment(found.completedDate).format('MMM Do YYYY')
-                } else {
-                    completedDate = 'Not yet Completed'
+                    completedDate = moment(found.completedOn).format('MMM Do YYYY')
                 }
                 const exampleEmbed = new Discord.RichEmbed()
                     .setColor('#000000')
