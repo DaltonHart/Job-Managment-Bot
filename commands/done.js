@@ -39,7 +39,6 @@ module.exports = {
                 if (found.complete === false) {
                     complete = 'Incomplete'
                     completedDate = 'Not yet Completed'
-                    
                 } else {
                     complete = 'Complete'
                     completedDate = moment(found.completedOn).format('MMM Do YYYY')
