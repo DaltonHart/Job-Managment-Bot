@@ -18,6 +18,15 @@ module.exports = {
             completedOn: new Date()
         }
 
+        message.channel.fetchMessages()
+            .then(messages => messages.forEach(channelMessage => {
+                if (channelMessage.content.includes(args[0])){
+                    console.log(channelMessage.id)
+                    console.log(channelMessage.content)
+                }
+            }))
+            .catch(console.error);
+
         db.Job.findOneAndUpdate({
             _id: id
         }, updatedJob, {
@@ -27,6 +36,7 @@ module.exports = {
                 console.log('ERROR', err)
                 return message.channel.send(`Invalid id entered.`);
             } else {
+                console.log('activating db call')
                 let assignedDate = moment(found.assignedDate)
                 let inWorks = assignedDate.fromNow()
                 let dueDate = moment(found.dueTime).format('MMM Do YYYY')
@@ -51,19 +61,14 @@ module.exports = {
                     .setTimestamp(new Date())
                     .setFooter(`Assigned ${inWorks}`)
 
+                console.log('Sending message')
+
                 message.channel.send(`Job ${found._id} has been completed and recorded to change log.`);
                 //message.client.channels.get("493242085831475210").send(exampleEmbed)
             }
 
         })
-        message.channel.fetchMessages()
-            .then(messages => messages.forEach(channelMessage => {
-                if (channelMessage.content.includes(args[0])){
-                    console.log(channelMessage.id)
-                    console.log(channelMessage.content)
-                }
-            }))
-            .catch(console.error);
+        
 
     },
 
