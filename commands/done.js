@@ -61,9 +61,10 @@ module.exports = {
 
             })
         }
-
-        message.client.channels.get("539424102717456384").fetchMessages()
+        //message.client.channels.get("539424102717456384")
+        message.channel.fetchMessages()
             .then(messages => {
+                console.log(messages)
                 messages.forEach(channelMessage => {
                     if (channelMessage.content.includes(`${args[0]}`)) {
                         console.log(channelMessage.id)
