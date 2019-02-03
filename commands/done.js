@@ -63,13 +63,16 @@ module.exports = {
         }
 
         message.channel.fetchMessages()
-            .then(messages => messages.forEach(channelMessage => {
-                if (channelMessage.content.includes(args[0])) {
-                    console.log(channelMessage.id)
-                    console.log(channelMessage.content)
-                }
+            .then(messages => {
+                messages.forEach(channelMessage => {
+                    if (channelMessage.content.includes(args[0])) {
+                        console.log(channelMessage.id)
+                        console.log(channelMessage.content)
+                    }
+                })
                 databaseCall()
-            }))
+            }
+            )
             .catch(console.error);
 
     },
