@@ -17,13 +17,18 @@ module.exports = {
             completedBy: 'NA',
             completedOn: new Date()
         }
+        databaseCall = () => {
 
-        db.Job.findOneAndUpdate({_id:id},updatedJob,{new:true}, (err, found)=>{
-            if (err) {
-                console.log('ERROR', err)
-               return message.channel.send(`Invalid id entered.`);
-              }
-              let assignedDate = moment(found.assignedDate)
+            db.Job.findOneAndUpdate({
+                _id: id
+            }, updatedJob, {
+                new: true
+            }, (err, found) => {
+                if (err) {
+                    console.log('ERROR', err)
+                    return message.channel.send(`Invalid id entered.`);
+                }
+                let assignedDate = moment(found.assignedDate)
                 let inWorks = assignedDate.fromNow()
                 let dueDate = moment(found.dueTime).format('MMM Do YYYY')
                 let assignedDateFormatted = assignedDate.format('MMM Do YYYY')
@@ -48,6 +53,29 @@ module.exports = {
                     .setFooter(`Assigned ${inWorks}`)
 
                 message.channel.send(`Job ${found._id} has been marked as not complete.`, exampleEmbed);
-        })
+            })
+        }
+
+        message.client.channels.get("493242085831475210").fetchMessages()
+            .then(messages => {
+                messages.forEach(channelMessage => {
+                    if (channelMessage.content.includes(`${args[0]}`)) {
+                        message.channel.fetchMessage(channelMessage.id)
+                            .then(msg => msg.delete())
+                            .catch(console.error);
+                    }
+                    if (channelMessage.embeds === undefined || channelMessage.embeds.length == 0) {
+                        console.log('no embeds')
+                    } else {
+                        if (channelMessage.embeds[0].description.includes(`**Job ID:** ${args[0]}`)) {
+                            message.channel.fetchMessage(channelMessage.id)
+                                .then(msg => msg.delete())
+                                .catch(console.error);
+                        }
+                    }
+                })
+                databaseCall()
+            })
+            .catch(console.error);
     },
 };
