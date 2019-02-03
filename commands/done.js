@@ -72,12 +72,15 @@ module.exports = {
                         message.channel.fetchMessage(channelMessage.id)
                             .then(msg => msg.delete())
                             .catch(console.error);
-                    } else if (channelMessage.embeds[0].description.includes(`${args[0]}`)){
-                        console.log(channelMessage.embeds[0])
-                        console.log(channelMessage.id)
-                        message.channel.fetchMessage(channelMessage.id)
-                            .then(msg => msg.delete())
-                            .catch(console.error);
+                    } 
+                    if (channelMessage.embeds[0]){
+                        if (channelMessage.embeds[0].description.includes(`${args[0]}`)){
+                            console.log(channelMessage.embeds[0])
+                            console.log(channelMessage.id)
+                            message.channel.fetchMessage(channelMessage.id)
+                                .then(msg => msg.delete())
+                                .catch(console.error);
+                        }
                     }
                 })
                 databaseCall()
@@ -85,7 +88,7 @@ module.exports = {
             )
             .catch(console.error);
 
-        databaseCall()
+        // databaseCall()
     },
 
 };
