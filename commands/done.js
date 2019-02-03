@@ -28,7 +28,6 @@ module.exports = {
                     console.log('ERROR', err)
                     return message.channel.send(`Invalid id entered.`);
                 } else {
-                    console.log('activating db call')
                     let assignedDate = moment(found.assignedDate)
                     let inWorks = assignedDate.fromNow()
                     let dueDate = moment(found.dueTime).format('MMM Do YYYY')
@@ -52,31 +51,23 @@ module.exports = {
                         .setDescription(`**Job ID:** ${found._id} assigned to ${found.user} \n **Due:** ${dueDate} **${complete}** \n **Assigned By:** ${assigner} on ${assignedDateFormatted} \n **Completed By:** ${found.completedBy}  **Completed On:** ${completedDate}`)
                         .setTimestamp(new Date())
                         .setFooter(`Assigned ${inWorks}`)
-
-                    console.log('Sending message')
-
                     message.channel.send(`Job ${found._id} has been completed and recorded to change log.`);
-                    //message.client.channels.get("493242085831475210").send(exampleEmbed)
+                    message.client.channels.get("493242085831475210").send(exampleEmbed)
                 }
 
             })
         }
         //message.client.channels.get("539424102717456384")
-        message.channel.fetchMessages()
+        message.client.channels.get("539424102717456384").fetchMessages()
             .then(messages => {
-                console.log(messages)
                 messages.forEach(channelMessage => {
                     if (channelMessage.content.includes(`${args[0]}`)) {
-                        console.log(channelMessage.id)
-                        console.log(channelMessage.content)
                         message.channel.fetchMessage(channelMessage.id)
                             .then(msg => msg.delete())
                             .catch(console.error);
                     } 
                     if (channelMessage.embeds[0]){
                         if (channelMessage.embeds[0].description.includes(`${args[0]}`)){
-                            console.log(channelMessage.embeds[0])
-                            console.log(channelMessage.id)
                             message.channel.fetchMessage(channelMessage.id)
                                 .then(msg => msg.delete())
                                 .catch(console.error);
