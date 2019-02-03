@@ -52,13 +52,14 @@ module.exports = {
                         .setTimestamp(new Date())
                         .setFooter(`Assigned ${inWorks}`)
                     message.channel.send(`Job ${found._id} has been completed and recorded to change log.`);
-                    message.client.channels.get("493242085831475210").send(exampleEmbed)
+                    //message.client.channels.get("493242085831475210").send(exampleEmbed)
                 }
 
             })
         }
         //message.client.channels.get("539424102717456384")
-        message.client.channels.get("539424102717456384").fetchMessages()
+        // message.client.channels.get("539424102717456384")
+        message.channel.fetchMessages()
             .then(messages => {
                 messages.forEach(channelMessage => {
                     if (channelMessage.content.includes(`${args[0]}`)) {
@@ -66,8 +67,10 @@ module.exports = {
                             .then(msg => msg.delete())
                             .catch(console.error);
                     } 
-                    if (channelMessage.embeds[0]){
-                        if (channelMessage.embeds[0].description.includes(`${args[0]}`)){
+                    if (channelMessage.embeds === undefined || channelMessage.embeds.length == 0){
+                        console.log('no embeds')
+                    } else {
+                        if (channelMessage.embeds[0].description.includes(`**Job ID:** ${args[0]}`)){
                             message.channel.fetchMessage(channelMessage.id)
                                 .then(msg => msg.delete())
                                 .catch(console.error);
