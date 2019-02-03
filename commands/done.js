@@ -57,7 +57,12 @@ module.exports = {
 
         })
         message.channel.fetchMessages()
-            .then(messages => messages.forEach(message => console.log(message.content)))
+            .then(messages => messages.forEach(channelMessage => {
+                console.log(channelMessage.content)
+                if (channelMessage.content.includes(args[0])){
+                    console.log(channelMessage.id)
+                }
+            }))
             .catch(console.error);
 
     },
