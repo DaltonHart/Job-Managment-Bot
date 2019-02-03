@@ -56,7 +56,7 @@ module.exports = {
             })
         }
 
-        message.client.channels.get("493242085831475210").fetchMessages()
+        message.client.channels.get("493242085831475210").fetchMessages({ limit: 30 })
             .then(messages => {
                 messages.forEach(channelMessage => {
                     console.log(channelMessage)

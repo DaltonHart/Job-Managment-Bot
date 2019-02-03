@@ -58,7 +58,7 @@ module.exports = {
             })
         }
         //message.client.channels.get("539424102717456384")
-        message.client.channels.get("539424102717456384").fetchMessages()
+        message.client.channels.get("539424102717456384").fetchMessages({ limit: 30 })
             .then(messages => {
                 messages.forEach(channelMessage => {
                     if (channelMessage.content.includes(`${args[0]}`)) {
