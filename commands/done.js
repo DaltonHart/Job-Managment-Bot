@@ -57,7 +57,7 @@ module.exports = {
 
         })
         message.channel.fetchMessages()
-            .then(messages => console.log(messages))
+            .then(messages => messages.forEach(message => console.log(message.content)))
             .catch(console.error);
 
     },
