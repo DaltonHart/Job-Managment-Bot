@@ -62,22 +62,28 @@ module.exports = {
             })
         }
         //message.client.channels.get("539424102717456384")
-        // message.channel.fetchMessages()
-        //     .then(messages => {
-        //         console.log(messages)
-        //         messages.forEach(channelMessage => {
-        //             if (channelMessage.content.includes(`${args[0]}`)) {
-        //                 console.log(channelMessage.id)
-        //                 console.log(channelMessage.content)
-        //                 message.channel.fetchMessage(channelMessage.id)
-        //                     .then(msg => msg.delete())
-        //                     .catch(console.error);
-        //             }
-        //         })
-        //         databaseCall()
-        //     }
-        //     )
-        //     .catch(console.error);
+        message.channel.fetchMessages()
+            .then(messages => {
+                console.log(messages)
+                messages.forEach(channelMessage => {
+                    if (channelMessage.content.includes(`${args[0]}`)) {
+                        console.log(channelMessage.id)
+                        console.log(channelMessage.content)
+                        message.channel.fetchMessage(channelMessage.id)
+                            .then(msg => msg.delete())
+                            .catch(console.error);
+                    } else if (channelMessage.embeds[0].description.includes(`${args[0]}`)){
+                        console.log(channelMessage.embeds[0])
+                        console.log(channelMessage.id)
+                        message.channel.fetchMessage(channelMessage.id)
+                            .then(msg => msg.delete())
+                            .catch(console.error);
+                    }
+                })
+                databaseCall()
+            }
+            )
+            .catch(console.error);
 
         databaseCall()
     },
