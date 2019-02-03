@@ -68,7 +68,7 @@ module.exports = {
                     if (channelMessage.content.includes(args[0])) {
                         console.log(channelMessage.id)
                         console.log(channelMessage.content)
-                        channel.fetchMessage(channelMessage.id).then(msg => msg.delete());
+                        message.channel.fetchMessage(channelMessage.id).then(msg => msg.delete());
                     }
                 })
                 databaseCall()
