@@ -59,7 +59,6 @@ module.exports = {
         message.client.channels.get("493242085831475210").fetchMessages({ limit: 30 })
             .then(messages => {
                 messages.forEach(channelMessage => {
-                    console.log(channelMessage)
                     if (channelMessage.content.includes(`${args[0]}`)) {
                         message.channel.fetchMessage(channelMessage.id)
                             .then(msg => msg.delete())
