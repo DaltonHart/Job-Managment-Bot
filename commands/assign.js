@@ -79,7 +79,10 @@ module.exports = {
                   let inWorks = assignedDate.fromNow()
                   let assignedDateFormatted = assignedDate.format('MMM Do YYYY')
                   
-                  db.Job.find({user:assignedUser}).exec((err,jobs)=>{
+                  db.Job.find({user:assignedUser}).exec((err,alljobs)=>{
+                      let jobs = alljobs.filter(function (job) {
+                        return job.complete == false
+                    });
                       let overburden = jobs.length
                       let assignerId = newJob.assigner.replace(/\D/g,'')
                       let assigner = message.client.users.get(assignerId).username
