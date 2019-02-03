@@ -56,28 +56,30 @@ module.exports = {
                     console.log('Sending message')
 
                     message.channel.send(`Job ${found._id} has been completed and recorded to change log.`);
-                    //message.client.channels.get("493242085831475210").send(exampleEmbed)
+                    message.client.channels.get("493242085831475210").send(exampleEmbed)
                 }
 
             })
         }
         //message.client.channels.get("539424102717456384")
-        message.channel.fetchMessages()
-            .then(messages => {
-                console.log(messages)
-                messages.forEach(channelMessage => {
-                    if (channelMessage.content.includes(`${args[0]}`)) {
-                        console.log(channelMessage.id)
-                        console.log(channelMessage.content)
-                        message.channel.fetchMessage(channelMessage.id)
-                            .then(msg => msg.delete())
-                            .catch(console.error);
-                    }
-                })
-                databaseCall()
-            }
-            )
-            .catch(console.error);
+        // message.channel.fetchMessages()
+        //     .then(messages => {
+        //         console.log(messages)
+        //         messages.forEach(channelMessage => {
+        //             if (channelMessage.content.includes(`${args[0]}`)) {
+        //                 console.log(channelMessage.id)
+        //                 console.log(channelMessage.content)
+        //                 message.channel.fetchMessage(channelMessage.id)
+        //                     .then(msg => msg.delete())
+        //                     .catch(console.error);
+        //             }
+        //         })
+        //         databaseCall()
+        //     }
+        //     )
+        //     .catch(console.error);
+
+        databaseCall()
     },
 
 };
