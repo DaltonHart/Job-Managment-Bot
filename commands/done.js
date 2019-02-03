@@ -56,7 +56,7 @@ module.exports = {
                     console.log('Sending message')
 
                     message.channel.send(`Job ${found._id} has been completed and recorded to change log.`);
-                    message.client.channels.get("493242085831475210").send(exampleEmbed)
+                    //message.client.channels.get("493242085831475210").send(exampleEmbed)
                 }
 
             })
